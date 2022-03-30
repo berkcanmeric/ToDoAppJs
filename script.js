@@ -9,9 +9,41 @@ const taskList = document.querySelector("#task-list");
 eventListeners();
 
 function eventListeners() {
+  //submit event
   form.addEventListener("submit", addNewItem);
+
+  //delete an item
+  taskList.addEventListener("click", deleteItem);
+
+  //delete all items
+  btnDeleteAll.addEventListener("click", deleteAllItems);
 }
 
+//delete all items
+function deleteAllItems(e) {
+  //one of the ways to do it
+
+  if (confirm("Do you want to delete All Items?")) {
+    taskList.innerHTML = "";
+
+    //   taskList.forEach(function (item) {
+    //     if (item.nodeType === 1) {
+    //       item.remove();
+    //     }
+    //   });
+  }
+  e.preventDefault;
+}
+function deleteItem(e) {
+  if (e.target.className === "fas fa-times") {
+    if (confirm("Do you want to delete this item?")) {
+      e.target.parentElement.parentElement.remove();
+    }
+  }
+  e.preventDefault();
+}
+
+//add new item
 function addNewItem(e) {
   if (input.value === "") {
     alert("Add new item");
@@ -29,7 +61,7 @@ function addNewItem(e) {
   li.appendChild(a);
   taskList.appendChild(li);
 
-  console.log(li);
+  input.value = "";
 
   e.preventDefault();
 }
